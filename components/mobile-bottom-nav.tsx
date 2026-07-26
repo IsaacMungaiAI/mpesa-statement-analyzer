@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { motion } from "framer-motion"
 import {
   LayoutDashboard,
   ArrowLeftRight,
-  FileText,
+  Upload,
   ChartColumn,
   Bot,
 } from "lucide-react"
@@ -13,7 +14,7 @@ import {
 const bottomNavItems = [
   { to: "/", label: "Home", icon: LayoutDashboard },
   { to: "/transactions", label: "Txns", icon: ArrowLeftRight },
-  { to: "/statements", label: "Upload", icon: FileText, primary: true },
+  { to: "/statements", label: "Upload", icon: Upload, primary: true },
   { to: "/analytics", label: "Stats", icon: ChartColumn },
   { to: "/ai-chat", label: "AI", icon: Bot },
 ]
@@ -34,7 +35,7 @@ export function MobileBottomNav() {
             <Link
               key={item.to}
               href={item.to}
-              className="flex h-11 w-11 -translate-y-3 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+              className="relative -mt-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-transform active:scale-95"
             >
               <item.icon className="size-5" />
             </Link>
@@ -45,12 +46,23 @@ export function MobileBottomNav() {
           <Link
             key={item.to}
             href={item.to}
-            className={`flex flex-col items-center gap-0.5 text-xs ${
-              isActive ? "text-primary" : "text-muted-foreground"
-            }`}
+            className="relative flex flex-col items-center gap-0.5 text-xs"
           >
-            <item.icon className="size-5" />
-            <span>{item.label}</span>
+            {isActive && (
+              <motion.div
+                layoutId="mobile-nav-indicator"
+                className="absolute -top-2 h-0.5 w-6 rounded-full bg-primary"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+            <item.icon
+              className={`size-5 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"}`}
+            />
+            <span
+              className={`transition-colors ${isActive ? "text-primary font-medium" : "text-muted-foreground"}`}
+            >
+              {item.label}
+            </span>
           </Link>
         )
       })}
