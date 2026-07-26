@@ -45,13 +45,13 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-3">
-        <Link href="/" className="flex items-center gap-2 overflow-hidden">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+        <Link href="/" className="flex items-center gap-2.5 overflow-hidden px-2">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-white shadow-sm shadow-primary/20">
             <span className="text-sm font-bold">P</span>
           </div>
           <div className="flex flex-col overflow-hidden group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold leading-none">PesaIQ</span>
-            <span className="text-xs text-muted-foreground">MPESA Intelligence</span>
+            <span className="text-sm font-bold tracking-tight">PesaIQ</span>
+            <span className="text-[10px] text-muted-foreground">MPESA Intelligence</span>
           </div>
         </Link>
       </SidebarHeader>
